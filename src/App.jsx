@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import {When} from 'react-if';
+import FailedSearchAlert from './FailedSearch';
 import './App.css'
 
-const APIkey = import.meta.env.VITE_API_KEY;
+const APIkey = import.meta.env.VITE_API_KEY || process.env.VITE_API_KEY;
 
 function App() {
   
@@ -16,24 +17,24 @@ function App() {
   }
 
   async function fetchLocation() {
-
     try {
-      let jsonData;
-
-      try {
-        console.log(`https://us1.locationiq.com/v1/search?key=${APIkey}&q=${userInput}&format=json`)
-        jsonData = await fetch(`https://us1.locationiq.com/v1/search?key=${APIkey}&q=${userInput}&format=json`);
-      } catch(error) {
-        console.error('Error: Failed to contact server', error);
-      }
-
+      let jsonData = await fetch(`https://us1.locationiq.com/v1/search?key=${APIkey}&q=${userInput}&format=json`);
       let parsedData = await jsonData.json();
       setLocation(parsedData[0]);
-
+      
+      if (parsedData[0].display_name === undefined) {
+        return (
+          <>
+            {FailedSearchAlert}
+          </>
+        )
+      }
     } catch(error) {
-      console.error('Error: Unable to parse received data', error);
+      console.error('Error: Unable to fetch or parse data', error);
+      setLocation({});
     }
   }
+  
   
   return (
     <>
