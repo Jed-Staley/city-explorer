@@ -2,7 +2,8 @@ import { useState } from 'react'
 import {When} from 'react-if';
 import './App.css'
 
-const APIkey = import.meta.env.VITE_API_KEY;
+const APIkey = import.meta.env.VITE_API_KEY || process.env.VITE_API_KEY;
+
 
 function App() {
   
