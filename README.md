@@ -1,11 +1,18 @@
 # City Explorer
 
 **Author**: Jedidiah Staley
+
 **Version**: 1.0.0
 
 ## Overview
 
 This is a wesbite app that will give the user the latitude and longitude of a given location (enetered into a submission field), as well as a map of the area.
+
+## Demo
+
+The live site can be viewed here:
+
+<https://staley-city-explorer.netlify.app/>
 
 ## Getting Started
 
@@ -39,7 +46,7 @@ This app is made using React, Javascript, HTML5, and CSS3. It utilizes the React
 
 04-01-2024 8:38pm - README.md written
 
-------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------
 
 Name of feature: Latitude and Longitude Delivery
 
@@ -51,7 +58,7 @@ Finish time: _____
 
 Actual time needed to complete: _____
 
-------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------
 
 Name of feature: Map Delivery
 
@@ -63,7 +70,7 @@ Finish time: _____
 
 Actual time needed to complete: _____
 
-------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------
 
 Name of feature: Error Messages Implementation
 
