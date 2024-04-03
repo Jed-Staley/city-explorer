@@ -9,6 +9,7 @@ function App() {
   
   const [userInput, setUserInput] = useState('');
   const [location, setLocation] = useState({});
+  const [weatherData, setWeatherData] = useState(null);
 
   const updateUserInput = newStr => setUserInput(newStr.target.value);
   const handleSubmit = cityStr => {
@@ -16,25 +17,28 @@ function App() {
     fetchLocation();
   }
 
-  async function fetchLocation() {
-
+  const fetchLocation = async () => {
     try {
-      let jsonData;
-
-      try {
-        console.log(`https://us1.locationiq.com/v1/search?key=${APIkey}&q=${userInput}&format=json`)
-        jsonData = await fetch(`https://us1.locationiq.com/v1/search?key=${APIkey}&q=${userInput}&format=json`);
-      } catch(error) {
-        console.error('Error: Failed to contact server', error);
-      }
-
-      let parsedData = await jsonData.json();
-      setLocation(parsedData[0]);
-
-    } catch(error) {
-      console.error('Error: Unable to parse received data', error);
+      const response = await fetch(
+        `https://us1.locationiq.com/v1/search?key=${APIkey}&q=${userInput}&format=json`
+      );
+      const data = await response.json();
+      setLocation(data[0]);
+      fetchWeatherData(data[0].display_name);
+    } catch (error) {
+      console.error('Error fetching location:', error);
     }
-  }
+  };
+
+  const fetchWeatherData = async (city) => {
+    try {
+      const response = await fetch(`/api/weather?city=${city}`);
+      const data = await response.json();
+      setWeatherData(data);
+    } catch (error) {
+      console.error('Error fetching weather data:', error);
+    }
+  };
   
   return (
     <>
@@ -57,6 +61,14 @@ function App() {
           <img src={`https://maps.locationiq.com/v3/staticmap?key=${APIkey}&center=${location.lat},${location.lon}&size=500x440&zoom=10`} />
         </section>
       </When>
+
+      {
+        weatherData && (
+        <section>
+          <h2>Weather Data</h2>
+          <pre>{JSON.stringify(weatherData, null, 2)}</pre>
+        </section>
+      )}
 
     </>
   )
