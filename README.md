@@ -50,37 +50,37 @@ This app is made using React, Javascript, HTML5, and CSS3. It utilizes the React
 
 Name of feature: Latitude and Longitude Delivery
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 30min
 
-Start time: _____
+Start time: 6:42
 
-Finish time: _____
+Finish time: 7:36
 
-Actual time needed to complete: _____
+Actual time needed to complete: 56min
 
 ---------------------------------------------------------
 
 Name of feature: Map Delivery
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 20
 
-Start time: _____
+Start time: 7:39
 
-Finish time: _____
+Finish time: 7:48
 
-Actual time needed to complete: _____
+Actual time needed to complete: 9min
 
 ---------------------------------------------------------
 
 Name of feature: Error Messages Implementation
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 30min
 
-Start time: _____
+Start time: 5:45
 
-Finish time: _____
+Finish time: 6:23
 
-Actual time needed to complete: _____
+Actual time needed to complete: 38min
 
 ## Credit and Collaborations
 
