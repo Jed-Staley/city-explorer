@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 import { When } from 'react-if';
 import './App.css';
+import Map from './Map.jsx';
+import Weather from './Weather.jsx';
+import Movies from './Movies.jsx';
+
 
 const APIkey = import.meta.env.VITE_API_KEY || process.env.VITE_API_KEY;
 const backendDomain = import.meta.env.VITE_BACKEND_DOMAIN || process.env.VITE_BACKEND_DOMAIN;
@@ -18,6 +22,19 @@ function App() {
     fetchLocation();
   };
 
+  const fetchBackendData = async (city, relativePath, setFunction) => {
+    try {
+      let url = backendDomain + relativePath + `?city=${city}`;
+      console.log('Contacting', url);
+      const response = await fetch(url);
+      const data = await response.json();
+      setFunction(data);
+    } catch (error) {
+      let url = backendDomain + relativePath + `?city=${city}`;
+      console.error('Error fetching data from', url, 'Error:', error);
+    }
+  }
+
   const fetchLocation = async () => {
     try {
       const response = await fetch(
@@ -33,19 +50,6 @@ function App() {
     }
   };
 
-  const fetchBackendData = async (city, relativePath, setFunction) => {
-    try {
-      let url = backendDomain + relativePath + `?city=${city}`;
-      console.log('Contacting', url);
-      const response = await fetch(url);
-      const data = await response.json();
-      setFunction(data);
-    } catch (error) {
-      let url = backendDomain + relativePath + `?city=${city}`;
-      console.error('Error fetching data from', url, 'Error:', error);
-    }
-  }
-
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -58,34 +62,17 @@ function App() {
         </section>
       )}
 
-      <When condition={location.lat && location.lon}>
-        <section>
-          <h5>
-            Latitude: {location.lat} Longitude: {location.lon}
-          </h5>
-          <img src={`https://maps.locationiq.com/v3/staticmap?key=${APIkey}&center=${location.lat},${location.lon}&size=500x440&zoom=10`} />
-        </section>
+      <When condition={location}>
+        <Map APIkey={APIkey} location={location} />
       </When>
 
-      {weatherData && (
-        <section>
-          <h2>Weather Data</h2>
-          {weatherData.map(item => (
-            <p key={item.date}>
-              {item.date}: {item.description}
-            </p>
-          ))}
-        </section>
-      )}
+      <When condition={weatherData}>
+        <Weather weatherData={weatherData} />
+      </When>
 
-      {moviesData && (
-        <section>
-          <h2>Movie Data</h2>
-          {moviesData.map(item => (
-            <p key={item}>{item}</p>
-          ))}
-        </section>
-      )}
+      <When condition={moviesData}>
+        <Movies moviesData={moviesData} />
+      </When>
     </>
   );
 }
