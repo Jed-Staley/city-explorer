@@ -7,6 +7,7 @@
 ## Overview
 
 This is a wesbite app that will give the user the latitude and longitude of a given location (enetered into a submission field), as well as a map of the area.
+It also gives the weather forecast for the area, and a list of the top 20 movies with the area name in their title.
 
 ## Demo
 
