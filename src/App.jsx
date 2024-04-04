@@ -33,7 +33,7 @@ function App() {
 
   const fetchWeatherData = async city => {
     try {
-      const response = await fetch(`http://localhost:3000/api/weather?city=${city}`);
+      const response = await fetch(`https://city-explorer-back.onrender.com/api/weather?city=${city}`);
       const data = await response.json();
       setWeatherData(data);
     } catch (error) {
@@ -43,7 +43,7 @@ function App() {
 
   const fetchMovieData = async city => {
     try {
-      const response = await fetch(`http://localhost:3000/api/movies?city=${city}`);
+      const response = await fetch(`https://city-explorer-back.onrender.com/api/movies?city=${city}`);
       const data = await response.json();
       setMoviesData(data);
     } catch (error) {
