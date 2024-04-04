@@ -15,8 +15,8 @@ const backendDomain = import.meta.env.VITE_BACKEND_DOMAIN || process.env.VITE_BA
 function App() {
   const [userInput, setUserInput] = useState('');
   const [location, setLocation] = useState({});
-  const [weatherData, setWeatherData] = useState(null);
-  const [moviesData, setMoviesData] = useState(null);
+  const [weatherData, setWeatherData] = useState([]);
+  const [moviesData, setMoviesData] = useState([]);
 
   const updateUserInput = event => setUserInput(event.target.value);
 
@@ -30,7 +30,10 @@ function App() {
       let url = backendDomain + relativePath + `?city=${city}`;
       console.log('Contacting', url);
       const response = await fetch(url);
-      const data = await response.json();
+      let data = await response.json();
+      if (!data.length) {
+        data = [];
+      }
       setFunction(data);
     } catch (error) {
       let url = backendDomain + relativePath + `?city=${city}`;
