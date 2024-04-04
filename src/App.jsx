@@ -3,6 +3,7 @@ import { When } from 'react-if';
 import './App.css';
 
 const APIkey = import.meta.env.VITE_API_KEY || process.env.VITE_API_KEY;
+const backendDomain = import.meta.env.VITE_BACKEND_DOMAIN || process.env.VITE_BACKEND_DOMAIN;
 
 function App() {
   const [userInput, setUserInput] = useState('');
@@ -24,36 +25,26 @@ function App() {
       );
       const data = await response.json();
       setLocation(data[0]);
-      fetchWeatherData(data[0].display_name.split(', ')[0]);
-      fetchMovieData(data[0].display_name.split(', ')[0]);
+      let locationName = data[0].display_name.split(', ')[0];
+      fetchBackendData(locationName, '/api/weather', setWeatherData);
+      fetchBackendData(locationName, '/api/movies', setMoviesData);
     } catch (error) {
       console.error('Error fetching location:', error);
     }
   };
 
-  const fetchWeatherData = async city => {
+  const fetchBackendData = async (city, relativePath, setFunction) => {
     try {
-      const response = await fetch(`https://city-explorer-back.onrender.com/api/weather?city=${city}`);
+      let url = backendDomain + relativePath + `?city=${city}`;
+      console.log('Contacting', url);
+      const response = await fetch(url);
       const data = await response.json();
-      setWeatherData(data);
+      setFunction(data);
     } catch (error) {
-      console.error('Error fetching weather data:', error);
+      let url = backendDomain + relativePath + `?city=${city}`;
+      console.error('Error fetching data from', url, 'Error:', error);
     }
-  };
-
-  const fetchMovieData = async city => {
-    try {
-      const response = await fetch(`https://city-explorer-back.onrender.com/api/movies?city=${city}`);
-      const data = await response.json();
-      setMoviesData(data);
-    } catch (error) {
-      console.error('Error fetching movies data:', error);
-    }
-  };
-
-  console.log('weather: ', weatherData);
-  console.log('movies: ', moviesData);
-
+  }
 
   return (
     <>
