@@ -1,4 +1,7 @@
 import { useState, useEffect } from 'react';
+import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 import { When } from 'react-if';
 import './App.css';
 import Map from './Map.jsx';
