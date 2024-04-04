@@ -82,6 +82,30 @@ Finish time: 6:23
 
 Actual time needed to complete: 38min
 
+---------------------------------------------------------
+
+Name of feature: Weather API
+
+Estimate of time needed to complete: 2hr
+
+Start time: 6:28
+
+Finish time: 9:23
+
+Actual time needed to complete: 2hr 55min
+
+---------------------------------------------------------
+
+Name of feature: Movies API
+
+Estimate of time needed to complete: 45min
+
+Start time: 10:15
+
+Finish time: 11:25
+
+Actual time needed to complete: 70min
+
 ## Credit and Collaborations
 
 Chat GPT
