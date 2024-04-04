@@ -8,6 +8,7 @@ function App() {
   const [userInput, setUserInput] = useState('');
   const [location, setLocation] = useState({});
   const [weatherData, setWeatherData] = useState(null);
+  const [moviesData, setMoviesData] = useState(null);
 
   const updateUserInput = event => setUserInput(event.target.value);
 
@@ -24,6 +25,7 @@ function App() {
       const data = await response.json();
       setLocation(data[0]);
       fetchWeatherData(data[0].display_name.split(', ')[0]);
+      fetchMovieData(data[0].display_name.split(', ')[0]);
     } catch (error) {
       console.error('Error fetching location:', error);
     }
@@ -39,11 +41,19 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    console.log('weatherData: ', weatherData);
-  }, [weatherData]);
+  const fetchMovieData = async city => {
+    try {
+      const response = await fetch(`http://localhost:3000/api/movies?city=${city}`);
+      const data = await response.json();
+      setMoviesData(data);
+    } catch (error) {
+      console.error('Error fetching movies data:', error);
+    }
+  };
 
-  console.log('Weather: ', weatherData);
+  console.log('weather: ', weatherData);
+  console.log('movies: ', moviesData);
+
 
   return (
     <>
@@ -73,6 +83,15 @@ function App() {
             <p key={item.date}>
               {item.date}: {item.description}
             </p>
+          ))}
+        </section>
+      )}
+
+      {moviesData && (
+        <section>
+          <h2>Movie Data</h2>
+          {moviesData.map(item => (
+            <p key={item}>{item}</p>
           ))}
         </section>
       )}
