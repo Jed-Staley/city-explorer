@@ -43,6 +43,8 @@ function App() {
     console.log('weatherData: ', weatherData);
   }, [weatherData]);
 
+  console.log('Weather: ', weatherData);
+
   return (
     <>
       <form onSubmit={handleSubmit}>
