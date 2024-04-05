@@ -2,6 +2,7 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  text-align: center;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -11,6 +12,19 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h2 {
+  margin: 20px;
+}
+
+#map {
+  margin: 30px;
+}
+
+.card-container1 {
+  width: 70%;
+  margin: 0 auto;
 }
 
 a {
@@ -76,5 +90,3 @@ button:focus-visible {
 .card:hover {
   cursor: pointer;
 }
-
-.card
