@@ -30,6 +30,7 @@ function App() {
       let url = backendDomain + relativePath + `?city=${city}`;
       console.log('Contacting', url);
       const response = await fetch(url);
+      console.log(response);
       let data = await response.json();
       if (!data.length) {
         data = [];
@@ -64,19 +65,19 @@ function App() {
 
       {location.display_name && (
         <section>
-          <h4>Location Information For: {location.display_name}</h4>
+          <h2>Location Information For: {location.display_name}</h2>
         </section>
       )}
 
-      <When condition={location}>
+      <When condition={location.display_name}>
         <Map APIkey={APIkey} location={location} />
       </When>
 
-      <When condition={weatherData}>
+      <When condition={weatherData[0]}>
         <Weather weatherData={weatherData} />
       </When>
 
-      <When condition={moviesData}>
+      <When condition={moviesData[0]}>
         <Movies moviesData={moviesData} />
       </When>
     </>

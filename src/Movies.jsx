@@ -4,7 +4,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 function Movies({ moviesData }) {
-  function MovieCard({ movie }) {
+  function Movie({ movie }) {
     return (
       <Col key={movie.title} style={{ placeItems: 'center', textAlign: 'center' }}>
         <Card style={{ width: '18rem', margin: 'auto'}} onClick={() => window.open(('https://www.google.com/search?q=IMDB ' + movie.title), '_blank')}>
@@ -16,10 +16,11 @@ function Movies({ moviesData }) {
   }
 
   return (
-    <section className="card-container" style={{ margin: '50px', width: 'auto'}}>
+    <section className="card-container2" style={{ margin: '50px', width: 'auto'}}>
+      <h2>Related Movies</h2>
       <Row xs={1} sm={2} md={3} lg={4} xl={5} className="g-4">
         {moviesData.map((movie) => (
-          <MovieCard key={movie.title} movie={movie} />
+          <Movie key={movie.title} movie={movie} />
         ))}
       </Row>
     </section>
