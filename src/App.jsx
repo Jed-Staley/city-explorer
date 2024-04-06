@@ -30,7 +30,6 @@ function App() {
       let url = backendDomain + relativePath + `?city=${city}`;
       console.log('Contacting', url);
       const response = await fetch(url);
-      console.log(response);
       let data = await response.json();
       if (!data.length) {
         data = [];
